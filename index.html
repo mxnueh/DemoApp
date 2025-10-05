@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyGuard - NASA Space Apps 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/leaflet.css" />
+    <!-- Fuentes locales -->
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url('assets/fonts/roboto-300.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url('assets/fonts/roboto-400.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            src: local('Roboto Medium'), local('Roboto-Medium'), url('assets/fonts/roboto-500.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url('assets/fonts/roboto-700.woff2') format('woff2');
+        }
+    </style>
+    <!-- Fallback a Google Fonts si las fuentes locales no están disponibles -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="header-content">
+                <h1>SkyGuard</h1>
+                <div class="subtitle">
+                    <p>NASA Space Apps 2025</p>
+                    <p class="data-source">Powered by TEMPO, IMERG & MERRA-2 Data</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="city-selector">
+            <button class="city-button active">Los Angeles, CA</button>
+            <button class="city-button">New York, NY</button>
+            <button class="city-button">Madrid, Spain</button>
+            <button class="city-button">Santo Domingo, DR</button>
+            <button class="city-button">London, UK</button>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search for a location...">
+        </div>
+        
+        <main>
+            <div class="dashboard">
+                <div class="weather-conditions">
+                    <h2>☀️ Weather Conditions</h2>
+                    <div class="weather-grid">
+                        <div class="weather-item">
+                            <div class="weather-icon">🌬️</div>
+                            <div class="weather-label">Wind</div>
+                            <div class="weather-value">12.5 km/h NE</div>
+                        </div>
+                        <div class="weather-item">
+                            <div class="weather-icon">💧</div>
+                            <div class="weather-label">Humidity</div>
+                            <div class="weather-value">65%</div>
+                        </div>
+                        <div class="weather-item">
+                            <div class="weather-icon">📊</div>
+                            <div class="weather-label">PBL</div>
+                            <div class="weather-value">850 m</div>
+                        </div>
+                        <div class="weather-item">
+                            <div class="weather-icon">🌧️</div>
+                            <div class="weather-label">Precipitation</div>
+                            <div class="weather-value">0 mm</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="air-quality-panel">
+                    <div class="city-info">
+                        <h2>Los Angeles, CA</h2>
+                        <div class="aqi-display">
+                            <div class="aqi-number">112</div>
+                            <div class="aqi-label moderate">Moderate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pollutants-grid">
+                        <div class="pollutant-item">
+                            <div class="pollutant-name">NO<sub>2</sub></div>
+                            <div class="pollutant-value">45.2</div>
+                            <div class="pollutant-unit">ppb</div>
+                        </div>
+                        <div class="pollutant-item">
+                            <div class="pollutant-name">O<sub>3</sub></div>
+                            <div class="pollutant-value">68.5</div>
+                            <div class="pollutant-unit">ppb</div>
+                        </div>
+                        <div class="pollutant-item">
+                            <div class="pollutant-name">PM2.5</div>
+                            <div class="pollutant-value">35.8</div>
+                            <div class="pollutant-unit">μg/m<sup>3</sup></div>
+                        </div>
+                        <div class="pollutant-item">
+                            <div class="pollutant-name">HCHO</div>
+                            <div class="pollutant-value">12.3</div>
+                            <div class="pollutant-unit">ppb</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="map-container">
+                    <div id="map"></div>
+                    <div class="map-overlay">
+                        <div class="legend">
+                            <h3>Pollution Levels</h3>
+                            <div class="legend-item">
+                                <span class="color-box high"></span>
+                                <span>High (Harmful)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="color-box medium"></span>
+                                <span>Medium (Moderate)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="color-box low"></span>
+                                <span>Low (Good)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tooltip" class="hidden">
+                        <p id="tooltip-text"></p>
+                    </div>
+                </div>
+                
+                <div class="action-cards">
+                    <div class="action-card trees">
+                        <div class="card-icon">🌳</div>
+                        <div class="card-content">
+                            <h3>Trees Needed</h3>
+                            <p>Calculate how many trees are needed to offset current pollution</p>
+                            <button id="trees-button" class="action-button">Trees Need</button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card affected-zones">
+                        <div class="card-icon">⚠️</div>
+                        <div class="card-content">
+                            <h3>Affected Zones</h3>
+                            <p>Visualize areas receiving wind-transported pollution</p>
+                            <button class="action-button">View Zones</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="info-panel" class="hidden">
+            <h3>Pollution Travel</h3>
+            <p>Pollution does not stay in one place. These zones, although 'clean,' suffer the consequences of pollution generated elsewhere due to factors like wind and water currents.</p>
+        </div>
+        
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modal-title">Reforestation Calculator</h2>
+                <div id="modal-body">
+                    <p id="trees-result"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

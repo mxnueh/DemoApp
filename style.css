@@ -1,0 +1,483 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #121826;
+    color: #ffffff;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4d9fff;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitle p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.data-source {
+    font-size: 0.9rem;
+    color: #8a9ab0;
+    margin-top: 5px;
+}
+
+/* City Selector */
+.city-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.city-button {
+    background-color: #1e2a3a;
+    color: #8a9ab0;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.city-button.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.city-button:hover:not(.active) {
+    background-color: #2a3a4a;
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #1e2a3a;
+    border: 1px solid #2a3a4a;
+    border-radius: 30px;
+    color: white;
+    font-size: 1rem;
+}
+
+.search-bar input::placeholder {
+    color: #8a9ab0;
+}
+
+/* Dashboard Layout */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Weather Conditions Panel */
+.weather-conditions {
+    background-color: #1e2a3a;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.weather-conditions h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.weather-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background-color: #121826;
+    border-radius: 10px;
+}
+
+.weather-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.weather-label {
+    font-size: 0.9rem;
+    color: #8a9ab0;
+    margin-bottom: 5px;
+}
+
+.weather-value {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Air Quality Panel */
+.air-quality-panel {
+    background-color: #1e2a3a;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.city-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.city-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.aqi-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aqi-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #f0c04c;
+}
+
+.aqi-label {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.aqi-label.good {
+    background-color: #4caf50;
+}
+
+.aqi-label.moderate {
+    background-color: #f0c04c;
+    color: #121826;
+}
+
+.aqi-label.unhealthy {
+    background-color: #ff5252;
+}
+
+.pollutants-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.pollutant-item {
+    background-color: #121826;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pollutant-name {
+    font-size: 1rem;
+    color: #8a9ab0;
+    margin-bottom: 5px;
+}
+
+.pollutant-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.pollutant-unit {
+    font-size: 0.8rem;
+    color: #8a9ab0;
+}
+
+/* Map Container Styles */
+#map-container {
+    position: relative;
+    height: 400px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+/* Legend Styles */
+.map-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(30, 42, 58, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    color: white;
+}
+
+.legend h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.color-box.high {
+    background-color: #ff5252;
+}
+
+.color-box.medium {
+    background-color: #ffa726;
+}
+
+.color-box.low {
+    background-color: #66bb6a;
+}
+
+/* Tooltip Styles */
+#tooltip {
+    position: absolute;
+    background-color: rgba(18, 24, 38, 0.9);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 1001;
+    transition: opacity 0.3s;
+    border: 1px solid #2a3a4a;
+}
+
+#tooltip.hidden {
+    opacity: 0;
+}
+
+/* Action Cards */
+.action-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.action-card {
+    background-color: #1e2a3a;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.action-card.trees {
+    background-color: #1a472a;
+}
+
+.action-card.affected-zones {
+    background-color: #5c2626;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-right: 15px;
+}
+
+.card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    color: #8a9ab0;
+}
+
+/* Info Panel Styles */
+#info-panel {
+    background-color: #1e2a3a;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s;
+}
+
+#info-panel.hidden {
+    display: none;
+}
+
+#info-panel h3 {
+    margin-bottom: 10px;
+    color: white;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: #1e2a3a;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 350px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8a9ab0;
+}
+
+.close-button:hover {
+    color: white;
+}
+
+/* Tree planting icon styles */
+.tree-planting-icon {
+    font-size: 24px;
+    text-align: center;
+}
+
+.plant-here-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.plant-here-btn:hover {
+    background-color: #45a049;
+}
+
+#modal-title {
+    margin-bottom: 15px;
+    color: white;
+}
+
+#trees-result {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Affected Zones Styles */
+.pollution-source {
+    z-index: 1000;
+}
+
+.affected-zone {
+    border: 3px dashed #9c27b0;
+    z-index: 900;
+}
+
+.wind-arrow {
+    z-index: 950;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #map-container {
+        grid-column: span 2;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .action-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .weather-grid, .pollutants-grid {
+        grid-template-columns: 1fr;
+    }
+}
